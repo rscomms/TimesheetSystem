@@ -8,7 +8,7 @@ namespace TimesheetSystem.UnitTests
     public class ApplicationDbContextTests
     {
         [Fact]
-        public void Can_Add_Entry_To_DbContext()
+        public void Add_MockDataToInMemoryDb_UsingDbContext_ReturnsInsertedData()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "TimesheetDb")
