@@ -2,7 +2,45 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model IEnumerable<Timesheet>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        /* Remove all margins and paddings from the body and html */
+
+    </style>
+</head>
+<body>
+    <h3>Timesheet Entries Table</h3>
+    <table id="timesheetTable">
+        <thead>
+            <tr>
+                <th>Entry Date</th>
+                <th>User Name</th>
+                <th>Project</th>
+                <th>Task Description</th>
+                <th>Hours Worked</th>
+                <th>Total Hours Worked</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in Model)
+            {
+                <tr>
+                    <td>@entry.Date.ToShortDateString()</td>
+                    <td>@entry.UserName</td>
+                    <td>@entry.ProjectName</td>
+                    <td>@entry.TaskDesc</td>
+                    <td>@entry.HoursWorked</td>
+                    <td>@entry.TotalHoursWorked</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
