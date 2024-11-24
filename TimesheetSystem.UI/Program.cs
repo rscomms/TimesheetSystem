@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TimesheetSystem.UI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseInMemoryDatabase("TimesheetDb");
 });
+
+builder.Services.AddScoped<ITimesheetDataRepository, TimesheetDataRepository>();
 
 var app = builder.Build();
 
