@@ -19,7 +19,7 @@ namespace TimesheetSystem.UI.Util
                 };
 
             Random random = new Random();
-            Dictionary<(string userName, DateOnly date), List<Timesheet>> dailyEntries = new(); // Tracks daily entries for each employee
+            Dictionary<(string userName, DateOnly date), List<Timesheet>> dailyEntries = new(); // Tracks daily entries for each user
 
             DateOnly startDate = new DateOnly(2022, 1, 1);
 
