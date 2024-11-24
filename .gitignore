@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/TimesheetSystem.UI/bin/Debug/net8.0
+/TimesheetSystem.UI/obj
+/TimesheetSystem.UI/.vs
