@@ -7,5 +7,7 @@ namespace TimesheetSystem.UI.Repositories
     {
         void Add(Timesheet entry);
         IEnumerable<Timesheet> GetAll();
+        int getRemainingHours(string userName, DateOnly entryDate);
+        void updateWorkingHours(string userName, DateOnly entryDate);
     }
 }

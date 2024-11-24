@@ -3,6 +3,7 @@ using TimesheetSystem.UI.Models;
 using TimesheetSystem.UI.Repositories;
 using Xunit;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace TimesheetSystem.UnitTests
 {
@@ -13,6 +14,7 @@ namespace TimesheetSystem.UnitTests
         {
             _repositoryMock = new Mock<ITimesheetDataRepository>();
         }
+
 
         [Fact]
         public void Add_ValidEntry_CallsRepositoryAddOnce()
@@ -41,7 +43,8 @@ namespace TimesheetSystem.UnitTests
         }
 
         [Fact]
-        public void GetAll_ValidEntry_ReturnsListOfEntries()
+        //Returns list of entries using the mock data
+        public void GetAll_MockEntry_ReturnsListOfEntries()
         {
             // Arrange
             var mockData = new List<Timesheet>
@@ -58,5 +61,31 @@ namespace TimesheetSystem.UnitTests
             Assert.NotNull(result);
             Assert.Contains(result, e => e.UserName == "John Smith");
         }
+
+        [Fact]
+        //Returns list of entries from the in-memory database - successfully
+        public void GetAll_ReturnsListOfEntries()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "TimesheetDb")
+                .Options;
+            var context = new ApplicationDbContext(options);
+
+            TimesheetDataRepository Object = new TimesheetDataRepository(context);
+
+            var newEntry = new Timesheet { ID = 3, UserName = "Jane Doe", ProjectName = "Project A", TaskDesc = "Feature A", HoursWorked = 5 };
+            Object.Add(newEntry);
+
+            // Act
+            var result = Object.GetAll();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Contains(result, e => e.UserName == "Jane Doe");
+        }
+
+
+        //We can add similar test cases for GetRemainingHours and UpdateWorkingHours and also may be we add failed cases as well.
     }
 }
