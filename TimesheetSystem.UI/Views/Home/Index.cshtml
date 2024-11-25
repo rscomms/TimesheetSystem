@@ -3,7 +3,6 @@
     var errorMessage = TempData["ErrorMessage"];
     var successMessage = TempData["SuccessMessage"];
 }
-
 @model IEnumerable<Timesheet>
 
 <!DOCTYPE html>
@@ -14,7 +13,6 @@
     <title>@ViewData["Title"]</title>
     <style>
         /* Remove all margins and paddings from the body and html */
-
     </style>
 </head>
 <body>
@@ -56,6 +54,7 @@
                 </div>
                 <div>
                     <label for="hoursWorked" style="font-weight: bold;">Hours Worked:</label>
+                    <!--TO DO: The maximum no of hours a user can work on a day is 8. This value can be stored in a config file -->
                     <input type="number" id="HoursWorked" name="HoursWorked" required placeholder="Enter Hours Worked" min="1" max="8" />
                 </div>
                 <button type="submit">Add</button>
