@@ -1,23 +1,4 @@
 ﻿
-//Validates form fields
-function validateForm() {
-    var hoursWorked = document.getElementById("hoursWorked").value;
-    var errorHours = document.getElementById("errorHours");
-
-    if (hoursWorked == "") {
-        document.getElementById("hoursWorked").value = 8;
-        return true;
-    }
-
-    if (hoursWorked <= 0) {
-        errorHours.style.display = "inline";
-        return false;
-    } else {
-        errorHours.style.display = "none";
-        return true;
-    }
-}
-
 //Downloads timesheet table as a CSV file
 function downloadCSV() {
     var table = document.getElementById("timesheetTable");

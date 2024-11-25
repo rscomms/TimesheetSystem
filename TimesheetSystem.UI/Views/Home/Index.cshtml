@@ -36,11 +36,11 @@
     <div class="container">
         <!-- Left Side Form -->
         <div class="form-container">
-            <h3>Add Timesheet Entry</h3>
-            <form asp-action="Add" method="post" id="timesheetForm" onsubmit="return validateForm()">
+            <h4>Enter Timesheet</h4>
+            <form asp-action="Add" method="post" id="timesheetForm">
                 <div>
                     <label for="UserName" style="font-weight: bold;">User Name:</label>
-                    <input type="text" id="UserName" name="UserName" required />
+                    <input type="text" id="UserName" name="UserName" required placeholder="Enter User Name" />
                 </div>
                 <div>
                     <label for="EntryDate" style="font-weight: bold;">Entry Date:</label>
@@ -48,24 +48,22 @@
                 </div>
                 <div>
                     <label for="projectName" style="font-weight: bold;">Project Name:</label>
-                    <input type="text" id="ProjectName" name="ProjectName" required />
+                    <input type="text" id="ProjectName" name="ProjectName" required placeholder="Enter Project Name" />
                 </div>
                 <div>
                     <label for="description" style="font-weight: bold;">Task Description:</label>
-                    <input type="text" id="TaskDesc" name="TaskDesc" required />
+                    <input type="text" id="TaskDesc" name="TaskDesc" required placeholder="Enter Task Description" />
                 </div>
                 <div>
                     <label for="hoursWorked" style="font-weight: bold;">Hours Worked:</label>
-                    <input type="number" id="HoursWorked" name="HoursWorked" min="-1" max="8" value="8" />
-                    <span id="errorHours" style="color: red; display: none;">Please enter a value greater than 0.</span>
+                    <input type="number" id="HoursWorked" name="HoursWorked" required placeholder="Enter Hours Worked" min="1" max="8" />
                 </div>
-                <button type="submit">Add Entry</button>
+                <button type="submit">Add</button>
             </form>
         </div>
 
         <!-- Right Side Table -->
         <div class="table-container">
-            <h3>Timesheet Entries Table</h3>
             <table id="timesheetTable">
                 <thead>
                     <tr>

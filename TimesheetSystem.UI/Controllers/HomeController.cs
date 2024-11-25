@@ -23,22 +23,12 @@ namespace TimesheetSystem.UI.Controllers
         [HttpPost]
         public IActionResult Add(Timesheet entry)
         {
-            if (entry.HoursWorked == 0)
-            {
-                TempData["ErrorMessage"] = "Invalid no. of hours worked.";
-                return RedirectToAction("Index");
-            }
-
-            string userName = entry.UserName?.Trim() ?? string.Empty;
-            if (string.IsNullOrWhiteSpace(entry.UserName))
-            {
-                TempData["ErrorMessage"] = "User name is required.";
-                return RedirectToAction("Index");
-            }
-
+            //TO DO: Can be refactored to move the below logic and also the repo calls to a seperate service method,
+            //as it is really minimal, I have left it here. 
+            string userName = entry.UserName.Trim();
             DateOnly entryDate = entry.Date;
 
-            int remainingHours = Math.Max(0, (8 - _repository.getRemainingHours(userName, entryDate)));
+            int remainingHours = Math.Max(0, (8 - _repository.GetTotalHoursWorked(userName, entryDate)));
             if (remainingHours == 0 || entry.HoursWorked > remainingHours)
             {
                 TempData["ErrorMessage"] = $"Invalid hours worked. User {userName} can only work for {remainingHours} hour/s more.";
@@ -47,7 +37,7 @@ namespace TimesheetSystem.UI.Controllers
             {
                 _repository.Add(entry);
                 //update the total worked hours for every data
-                _repository.updateWorkingHours(userName, entryDate);
+                _repository.UpdateWorkingHours(userName, entryDate);
                 TempData["SuccessMessage"] = $"Entry added successfully!";
             }
             return RedirectToAction("Index");

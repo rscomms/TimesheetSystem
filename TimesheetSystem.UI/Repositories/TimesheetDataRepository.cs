@@ -8,6 +8,8 @@ namespace TimesheetSystem.UI.Repositories
     public class TimesheetDataRepository : ITimesheetDataRepository
     {
         private readonly ApplicationDbContext _context;
+        //TO DO: Error logging
+
         public TimesheetDataRepository(ApplicationDbContext context)
         {
             _context = context;
@@ -29,7 +31,7 @@ namespace TimesheetSystem.UI.Repositories
                 .ToList();
         }
 
-        public int getRemainingHours(string userName, DateOnly entryDate)
+        public int GetTotalHoursWorked(string userName, DateOnly entryDate)
         {
             int totalHoursWorked = _context.Timesheets
                 .Where(entry => entry.UserName == userName && entry.Date == entryDate)
@@ -38,7 +40,7 @@ namespace TimesheetSystem.UI.Repositories
             return totalHoursWorked;
         }
 
-        public void updateWorkingHours(string userName, DateOnly entryDate)
+        public void UpdateWorkingHours(string userName, DateOnly entryDate)
         {
             //for each record with userName and entryDate
             //update totalWorkingHours as sum of all workingHours()
