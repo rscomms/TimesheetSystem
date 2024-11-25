@@ -31,7 +31,7 @@ namespace TimesheetSystem.UI.Controllers
             int remainingHours = Math.Max(0, (8 - _repository.GetTotalHoursWorked(userName, entryDate)));
             if (remainingHours == 0 || entry.HoursWorked > remainingHours)
             {
-                TempData["ErrorMessage"] = $"Invalid hours worked. User {userName} can only work for {remainingHours} hour/s more.";
+                TempData["ErrorMessage"] = $"Exceeded daily hours limit. User {userName} can only work for {remainingHours} hour/s more.";
             }
             else
             {
